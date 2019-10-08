@@ -17,7 +17,7 @@ resource "random_pet" "server" {
 }
 
 resource "aws_instance" "petserver" {
-  # Read the AMI id "through" the random_id resource to ensure that
+  # Read the AMI id "through" the random_pet resource to ensure that
   # both will change together.
   ami = "${random_pet.server.keepers.ami_id}"
 
