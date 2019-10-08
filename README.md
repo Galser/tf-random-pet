@@ -66,7 +66,8 @@ And the only one resulting attribute is
 
         server_name = zoo-server-warm-grackle
     ```
-    Now, here as you can see we have the server name post-suffixed with "warm-grackle". While in reality we don't have such bird, but, you can check probably its relative, "Great Grackle" ![Great Grackle image](https://www.allaboutbirds.org/guide/assets/photo/67364561-480px.jpg) in  [this National Geographic article](https://www.nationalgeographic.com/animals/birds/g/great-tailed-grackle/).
+    Now, here as you can see we have the server name post-suffixed with "warm-grackle". While in reality we don't have such bird, but, you can check probably its relative, "Great Grackle" in  [this National Geographic article](https://www.nationalgeographic.com/animals/birds/g/great-tailed-grackle/), or maybe it is the common one :  ![Common Grackle image](https://www.allaboutbirds.org/guide/assets/photo/67364561-480px.jpg).
+    ( Courtesy of image goes to https://www.allaboutbirds.org/ )
 
     
 -  Do not forget to free-up resource, when they do not needed anymore, by running : 
