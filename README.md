@@ -28,13 +28,36 @@ And the only one resulting attribute is
 - Let's define our infrastrure by putting code below intfo file `main.tf` :
     ```terraform
     variable "ami_id" {
-    default = "ami-048d25c1bda4feda7" # Ubuntu 18.04.3 Bionic, custom
+      default = "ami-048d25c1bda4feda7" # Ubuntu 18.04.3 Bionic, custom
     }
 
     # AWS provider
     provider "aws" {
-    profile    = "default"
-    region     = "eu-central-1"
+      profile    = "default"
+      region     = "eu-central-1"
+    }
+
+    resource "random_pet" "server" {
+      keepers = {
+        # Generate a new "pet name" each time we switch to a new AMI id
+        ami_id = "${var.ami_id}"
+      }
+    }
+
+    resource "aws_instance" "petserver" {
+      # Read the AMI id "through" the random_pet resource to ensure that
+      # both will change together.
+      ami = "${random_pet.server.keepers.ami_id}"
+
+      instance_type = "t2.micro"
+
+      tags = {
+        "name" = "zoo-server-${random_pet.server.id}"
+      }
+    }
+
+    output "server_name" {
+      value = "${aws_instance.petserver.tags["name"]}"
     }
 
     ```
@@ -67,7 +90,8 @@ And the only one resulting attribute is
         server_name = zoo-server-warm-grackle
     ```
     Now, here as you can see we have the server name post-suffixed with "warm-grackle". While in reality we don't have such bird, but, you can check probably its relative, "Great Grackle" in  [this National Geographic article](https://www.nationalgeographic.com/animals/birds/g/great-tailed-grackle/), or maybe it is the common one :  ![Common Grackle image](https://www.allaboutbirds.org/guide/assets/photo/67364561-480px.jpg).
-    ( Courtesy of image goes to https://www.allaboutbirds.org/ )
+
+> ( Courtesy of image goes to https://www.allaboutbirds.org/ )
 
     
 -  Do not forget to free-up resource, when they do not needed anymore, by running : 
@@ -80,10 +104,10 @@ This concludes the section. Thank you!
 
 
 # todo
-- [ ] example code
 - [ ] update Readme
 
 # done
 
 - [x] initial readme
 - [x] intro
+- [x] example code
