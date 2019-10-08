@@ -24,6 +24,59 @@ The following arguments are supported:
 And the only one resulting attribute is
 - `id` of type (string) - that is going to be the random pet name
 
+# Example usage
+- Let's define our infrastrure by putting code below intfo file `main.tf` :
+    ```terraform
+    variable "ami_id" {
+    default = "ami-048d25c1bda4feda7" # Ubuntu 18.04.3 Bionic, custom
+    }
+
+    # AWS provider
+    provider "aws" {
+    profile    = "default"
+    region     = "eu-central-1"
+    }
+
+    ```
+- Init Terraform with : 
+    ```
+    terraform init
+    ```
+- Now, let's run apply for our code :
+    ```
+    terraform.apply
+    ```
+    And reply `yes`
+- Output going to look similar to : 
+    ```
+    An execution plan has been generated and is shown below.
+    Resource actions are indicated with the following symbols:
+    + create
+    ...
+    random_pet.server: Creating...
+    random_pet.server: Creation complete after 0s [id=warm-grackle]
+    aws_instance.petserver: Creating...
+    aws_instance.petserver: Still creating... [10s elapsed]
+    aws_instance.petserver: Still creating... [20s elapsed]
+    aws_instance.petserver: Creation complete after 22s [id=i-06aa303a8d9dfd127]
+
+    Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+    Outputs:
+
+        server_name = zoo-server-warm-grackle
+    ```
+    Now, here as you can see we have the server name post-suffixed with "warm-grackle". While in reality we don't have such bird, but, you can check probably its relative, "Great Grackle" ![Great Grackle image](https://www.allaboutbirds.org/guide/assets/photo/67364561-480px.jpg) in  [this National Geographic article](https://www.nationalgeographic.com/animals/birds/g/great-tailed-grackle/).
+
+    
+-  Do not forget to free-up resource, when they do not needed anymore, by running : 
+    ```
+    terraform destroy
+    ```
+    And replying `yes` to the question
+
+This concludes the section. Thank you! 
+
 
 # todo
 - [ ] example code
