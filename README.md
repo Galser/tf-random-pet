@@ -14,6 +14,17 @@ The resource `random_pet` generates random pet names that are intended to be use
 
 This resource can be used in conjunction with resources that have the `create_before_destroy` lifecycle flag set, to avoid conflicts with unique names during the brief period where both the old and new resources exist concurrently.
 
+The following arguments are supported:
+- `keepers` - (Optional) - as with all random provider resources - Arbitrary map of values that, when changed, will trigger a new id to be generated. See the main provider documentation for more information.
+- `length` - (Optional) The length (in words) of the pet name. 
+> Note : Length in specified in WORDS!
+- `prefix` - (Optional) A string to prefix the name with.
+- `separator` - (Optional) The character to separate words in the pet name.
+
+And the only one resulting attribute is
+- `id` of type (string) - that is going to be the random pet name
+
+
 # todo
 - [ ] example code
 - [ ] update Readme
